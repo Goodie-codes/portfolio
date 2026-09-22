@@ -1,0 +1,11 @@
+:root {
+  --bg-main: #08090D;
+  --text-main: #F3F4F6;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
