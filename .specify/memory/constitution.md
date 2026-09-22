@@ -2,11 +2,12 @@
 
 ## Core Principles
 
-### I. Visual Distinction & "Dope" Aesthetics (NON-NEGOTIABLE)
-The portfolio must command immediate visual authority. Generic designs, unstyled defaults, and standard bootstrap looks are strictly forbidden. The visual language follows a sleek, dark modern aesthetic inspired by Linear, Raycast, and Vercel:
-- **Depth & Atmosphere**: Dynamic ambient radial gradients, subtle SVG grid/dot background meshes, and fine glassmorphism (`backdrop-filter: blur(16px)` with delicate border illumination `rgba(255, 255, 255, 0.08)`).
-- **Typography & Hierarchy**: High-contrast, geometric modern sans (Inter / Outfit / JetBrains Mono for code badges) with disciplined optical sizing and tracking.
-- **Micro-Interactions & Fluid Motion**: Dynamic spring animations, subtle cursor follower or interactive card spotlight effects, smooth pill transitions, and tactile hover states.
+### I. Liquid Glass Aesthetics & Visual Distinction (NON-NEGOTIABLE)
+The portfolio must command immediate visual authority through an unmistakable, premium **Liquid Glass** aesthetic (inspired by Apple visionOS, macOS acrylic, and modern fluid glassmorphism):
+- **Frosted Glass Depth & Refraction**: Multi-layered frosted glass panels using `backdrop-filter: blur(24px) saturate(190%)`, dynamic translucent glass gradient surfaces (`linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)`), and crisp specular edge reflections (`box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25)`).
+- **Fluid Ambient Mesh Lighting**: Dynamic, floating fluid ambient orbs (electric violet, deep indigo, radiant cyan, and chromatic magenta) moving smoothly behind the glass layers to create vivid depth and liquid light refraction.
+- **Interactive Light Sheen**: Tactile cursor-following spotlights and liquid reflection overlays that respond dynamically to mouse hover and touch.
+- **Typography & Hierarchy**: High-contrast geometric sans (Outfit for impactful headings, Inter for crisp legibility, and JetBrains Mono for code/badges).
 
 ### II. Component-Driven & Pure Design Tokens
 - Strict separation of visual tokens (colors, blur radius, borders, spacing scale, z-index hierarchy) defined as CSS custom properties (`:root`).

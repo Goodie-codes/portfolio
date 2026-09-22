@@ -119,7 +119,11 @@ As an interested recruiter, founder, or collaborator, I want a frictionless way 
 - **FR-007**: System MUST provide an interactive developer terminal widget supporting commands: `help`, `about`, `projects`, `skills`, `clear`, `sudo`, `contact`.
 - **FR-008**: System MUST provide a Contact section featuring an interactive contact form (Name, Email, Message) with real-time field validation, direct one-click email copy button with floating toast notification, and resume download link.
 - **FR-009**: System MUST support a global Command Palette (`⌘K` on Mac / `Ctrl+K` on Windows/Linux) allowing rapid keyboard navigation across all sections, external links, and theme toggle.
-- **FR-010**: System MUST enforce dark-mode aesthetic with Linear/Vercel-inspired deep obsidian backgrounds (`#090A0F` / `#0D0F17`), subtle violet/cyan ambient glow accents, and glassmorphic card borders (`backdrop-filter: blur(16px)`).
+- **FR-010**: System MUST enforce a high-end **Liquid Glass** aesthetic featuring:
+  - Multi-layered frosted glass surfaces with `backdrop-filter: blur(20px) saturate(180%)`
+  - Specular top-edge light highlights (`inset 0 1px 1px rgba(255, 255, 255, 0.25)`)
+  - Translucent border gradients (`rgba(255, 255, 255, 0.12)`)
+  - Dynamic fluid ambient glowing orbs (chromatic violet `#8B5CF6`, deep indigo `#6366F1`, cyan `#06B6D4`, and magenta `#EC4899`) floating smoothly behind the glass layers to create vivid refraction.
 - **FR-011**: System MUST provide a centralized, easily editable data configuration file (`src/data/portfolioData.js`) so that personal information, projects, career history, and contact details can be modified in one place without touching UI components.
 
 ### Key Entities
