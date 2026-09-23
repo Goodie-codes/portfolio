@@ -17,13 +17,19 @@ export default function BentoGrid({ onSelectProject }) {
 
   return (
     <section id="work" className="section-container">
-      <div className="section-header">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span className="section-eyebrow">Selected Work</span>
         <h2 className="section-title">Production Codebases & Live Deployments</h2>
         <p className="section-description">
           Live platforms and web applications deployed to production. Click any project card or the live site button to explore in real-time.
         </p>
-      </div>
+      </motion.div>
 
       <div className="apple-bento-grid">
         {/* =================================================================
@@ -420,69 +426,83 @@ export default function BentoGrid({ onSelectProject }) {
       </div>
 
       {/* Additional GitHub Repositories Grid */}
-      <div className="additional-repos-section">
+      <motion.div
+        className="additional-repos-section"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
         <h3 className="additional-repos-title">Other Public Deployments & Repositories</h3>
         <div className="additional-repos-grid">
-          {otherRepos.map((p) => (
-            <AppleTiltCard key={p.id} className="mini-repo-card mini-repo-clickable" maxTilt={3}>
-              <div
-                className="mini-repo-inner"
-                onClick={(e) => handleCardClick(e, p.liveUrl || p.githubUrl)}
-                role="link"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleCardClick(e, p.liveUrl || p.githubUrl);
-                }}
-                title={`Click to open ${p.liveUrl ? 'live deployment' : 'repository'}`}
-              >
-                <div className="mini-repo-top">
-                  <span className="mini-repo-badge">{p.primaryLanguage}</span>
-                  <div className="mini-repo-actions">
-                    {p.liveUrl && (
+          {otherRepos.map((p, idx) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <AppleTiltCard className="mini-repo-card mini-repo-clickable" maxTilt={3}>
+                <div
+                  className="mini-repo-inner"
+                  onClick={(e) => handleCardClick(e, p.liveUrl || p.githubUrl)}
+                  role="link"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleCardClick(e, p.liveUrl || p.githubUrl);
+                  }}
+                  title={`Click to open ${p.liveUrl ? 'live deployment' : 'repository'}`}
+                >
+                  <div className="mini-repo-top">
+                    <span className="mini-repo-badge">{p.primaryLanguage}</span>
+                    <div className="mini-repo-actions">
+                      {p.liveUrl && (
+                        <a
+                          href={p.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mini-live-link"
+                          title="Visit Live Site in real-time"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span className="live-dot-mini" />
+                          <span>Live Site</span>
+                          <ArrowUpRight size={12} />
+                        </a>
+                      )}
                       <a
-                        href={p.liveUrl}
+                        href={p.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="mini-live-link"
-                        title="Visit Live Site in real-time"
+                        className="mini-repo-link"
+                        title={`Open ${p.title} on GitHub`}
+                        aria-label={`Open ${p.title} on GitHub`}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span className="live-dot-mini" />
-                        <span>Live Site</span>
-                        <ArrowUpRight size={12} />
+                        <Github size={14} />
                       </a>
-                    )}
-                    <a
-                      href={p.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mini-repo-link"
-                      title={`Open ${p.title} on GitHub`}
-                      aria-label={`Open ${p.title} on GitHub`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github size={14} />
-                    </a>
+                    </div>
                   </div>
+
+                  <a
+                    href={p.liveUrl || p.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mini-title-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <h4 className="mini-repo-title">{p.title}</h4>
+                    <ArrowUpRight size={14} className="mini-title-arrow" />
+                  </a>
+
+                  <p className="mini-repo-desc">{p.description}</p>
                 </div>
-
-                <a
-                  href={p.liveUrl || p.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mini-title-link"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <h4 className="mini-repo-title">{p.title}</h4>
-                  <ArrowUpRight size={14} className="mini-title-arrow" />
-                </a>
-
-                <p className="mini-repo-desc">{p.description}</p>
-              </div>
-            </AppleTiltCard>
+              </AppleTiltCard>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

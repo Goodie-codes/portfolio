@@ -27,13 +27,19 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="section-container">
-      <div className="section-header">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span className="section-eyebrow">Contact / Connect</span>
         <h2 className="section-title">Let’s Start a Conversation</h2>
         <p className="section-description">
           Whether you have an interesting engineering challenge, a role to discuss, or just want to connect, feel free to reach out.
         </p>
-      </div>
+      </motion.div>
 
       <div className="contact-layout">
         {/* Direct Reach Out Card */}
