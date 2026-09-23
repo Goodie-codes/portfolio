@@ -1,80 +1,46 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
+import LiquidGlassBackground from './components/LiquidGlassBackground';
 import Hero from './components/Hero';
-import ProjectsSection from './components/ProjectsSection';
-import ProjectModal from './components/ProjectModal';
-import SkillsSection from './components/SkillsSection';
+import AboutSection from './components/AboutSection';
+import BentoGrid from './components/BentoGrid';
+import ArchitectureInspector from './components/ArchitectureInspector';
 import ExperienceSection from './components/ExperienceSection';
-import TerminalWidget from './components/TerminalWidget';
 import ContactSection from './components/ContactSection';
-import CommandPalette from './components/CommandPalette';
-import Toast from './components/Toast';
 import Footer from './components/Footer';
+import ProjectModal from './components/ProjectModal';
+import { selectedProjects } from './data/portfolioData';
 
 export default function App() {
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [activeModalProject, setActiveModalProject] = useState(null);
 
-  const showToast = (msg) => {
-    setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage('');
-    }, 3500);
-  };
-
-  const handleOpenTerminal = () => {
-    const el = document.getElementById('terminal');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleSelectProject = (projectRef) => {
+    const fullProject = selectedProjects.find((p) => p.id === projectRef.id) || projectRef;
+    setActiveModalProject(fullProject);
   };
 
   return (
     <div className="app-wrapper">
-      {/* Dynamic Liquid Mesh Ambient Background */}
-      <div className="ambient-background-wrapper" aria-hidden="true">
-        <div className="ambient-grid" />
-        <div className="liquid-orb liquid-orb-1" />
-        <div className="liquid-orb liquid-orb-2" />
-        <div className="liquid-orb liquid-orb-3" />
-        <div className="liquid-orb liquid-orb-4" />
-      </div>
+      <LiquidGlassBackground />
+      <Navbar />
 
-      {/* Global Navigation */}
-      <Navbar onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
-
-      {/* Main Portfolio Sections */}
       <main className="main-content">
-        <Hero onOpenTerminal={handleOpenTerminal} />
-        <ProjectsSection onSelectProject={setSelectedProject} />
-        <SkillsSection />
+        <Hero />
+        <AboutSection />
+        <BentoGrid onSelectProject={handleSelectProject} />
+        <ArchitectureInspector />
         <ExperienceSection />
-        <TerminalWidget />
-        <ContactSection onShowToast={showToast} />
+        <ContactSection />
       </main>
 
-      {/* Global Footer */}
       <Footer />
 
-      {/* Interactive Project Case Study Drawer Modal */}
-      {selectedProject && (
+      {activeModalProject && (
         <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
         />
       )}
-
-      {/* Global Command Palette (⌘K) */}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onSelectProject={setSelectedProject}
-        onOpenTerminal={handleOpenTerminal}
-      />
-
-      {/* Global Floating Toast */}
-      <Toast message={toastMessage} />
     </div>
   );
 }

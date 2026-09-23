@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll } from 'motion/react';
 import { personalInfo } from '../data/portfolioData';
-import { Terminal, Command, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-export default function Navbar({ onOpenCommandPalette }) {
-  const [activeSection, setActiveSection] = useState('hero');
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Navbar() {
+  const [activeSection, setActiveSection] = useState('work');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   const navLinks = [
-    { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Tech Stack' },
+    { id: 'about', label: 'About' },
+    { id: 'work', label: 'Work' },
+    { id: 'craft', label: 'Craft' },
     { id: 'experience', label: 'Experience' },
-    { id: 'terminal', label: 'Console' },
     { id: 'contact', label: 'Contact' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
 
-      const sections = ['hero', 'projects', 'skills', 'experience', 'terminal', 'contact'];
-      const scrollPosition = window.scrollY + 180;
+      const sections = ['about', 'work', 'craft', 'experience', 'contact'];
+      const scrollPos = window.scrollY + 180;
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
+      for (const id of sections) {
+        const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
           const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(id);
             break;
           }
         }
@@ -40,104 +42,100 @@ export default function Navbar({ onOpenCommandPalette }) {
   }, []);
 
   return (
-    <header className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        {/* Brand / Logo */}
-        <a href="#hero" className="brand-logo" aria-label="Goodness Home">
-          <div className="brand-icon">
-            <Sparkles size={16} className="brand-sparkle" />
-          </div>
-          <span className="brand-name">
-            {personalInfo.name}
-            <span className="brand-dot">.</span>
-          </span>
-        </a>
+    <>
+      {/* Apple-style Top Scroll Progress Bar */}
+      <motion.div
+        className="scroll-progress-line"
+        style={{ scaleX: scrollYProgress }}
+      />
 
-        {/* Desktop Navigation Links */}
-        <nav className="desktop-nav-links" aria-label="Main Navigation">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                className={`nav-link ${isActive ? 'active' : ''}`}
-              >
-                {link.label}
-                {isActive && <span className="active-pill-glow" />}
-              </a>
-            );
-          })}
-        </nav>
-
-        {/* Right Actions: Command Palette & Get in touch */}
-        <div className="nav-actions">
-          <button
-            onClick={onOpenCommandPalette}
-            className="cmd-palette-btn"
-            title="Press ⌘K to open command palette"
-            aria-label="Open Command Palette"
+      <header className={`navbar-wrapper ${scrolled ? 'scrolled-glass' : ''}`}>
+        <div className="navbar-container">
+          {/* Brand */}
+          <motion.a
+            href="#top"
+            className="brand-logo"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <Command size={14} />
-            <span className="cmd-text">Quick Search</span>
-            <kbd className="cmd-badge">⌘K</kbd>
-          </button>
+            <span>{personalInfo.name}</span>
+            <span className="brand-dot">/</span>
+          </motion.a>
 
-          <a href="#contact" className="nav-contact-btn">
-            <span>Let's Talk</span>
-            <ArrowUpRight size={15} />
-          </a>
-
-          {/* Mobile Menu Toggle Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="mobile-menu-btn"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
-          <div className="mobile-drawer liquid-glass" onClick={(e) => e.stopPropagation()}>
-            <div className="mobile-nav-list">
-              {navLinks.map((link) => (
+          {/* Desktop Navigation with Animated Sliding Active Pill */}
+          <nav className="desktop-nav-links" aria-label="Main Navigation">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
                 <a
                   key={link.id}
                   href={`#${link.id}`}
-                  className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
+                  className={`nav-link ${isActive ? 'active' : ''}`}
                 >
-                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navActivePill"
+                      className="nav-active-pill"
+                      transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                    />
+                  )}
+                  <span className="nav-link-text">{link.label}</span>
                 </a>
-              ))}
-              <div className="mobile-drawer-actions">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenCommandPalette();
-                  }}
-                  className="mobile-cmd-btn"
-                >
-                  <Command size={16} />
-                  <span>Command Palette (⌘K)</span>
-                </button>
-                <a
-                  href="#contact"
-                  className="liquid-glass-btn liquid-glass-btn-primary"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span>Get In Touch</span>
-                  <ArrowUpRight size={16} />
-                </a>
-              </div>
-            </div>
+              );
+            })}
+          </nav>
+
+          {/* Action */}
+          <div className="nav-actions">
+            <motion.a
+              href="#contact"
+              className="nav-cta-btn"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            >
+              Get in touch
+            </motion.a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="mobile-menu-btn"
+              aria-label="Toggle navigation"
+            >
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Navigation Dropdown */}
+        {mobileMenuOpen && (
+          <motion.div
+            className="mobile-nav-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center', marginTop: '12px' }}
+            >
+              Get in touch
+            </a>
+          </motion.div>
+        )}
+      </header>
+    </>
   );
 }

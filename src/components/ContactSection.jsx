@@ -1,176 +1,168 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { personalInfo } from '../data/portfolioData';
-import { Mail, Copy, Check, Send, MessageSquare, Clock, ArrowUpRight } from 'lucide-react';
+import { Mail, Copy, Check, ArrowUpRight, Send } from 'lucide-react';
 import { Github, Linkedin } from './BrandIcons';
+import AppleTiltCard from './AppleTiltCard';
 
-export default function ContactSection({ onShowToast }) {
+export default function ContactSection() {
   const [copied, setCopied] = useState(false);
+  const [formSent, setFormSent] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [formStatus, setFormStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
-    onShowToast('Email copied to clipboard! 📋');
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      onShowToast('Please fill out all fields before sending.');
-      return;
-    }
-
-    setFormStatus('sending');
+    setFormSent(true);
     setTimeout(() => {
-      setFormStatus('sent');
-      onShowToast('Message transmitted! I will respond promptly. 🚀');
+      setFormSent(false);
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setFormStatus('idle'), 4000);
-    }, 1000);
+    }, 4000);
   };
 
   return (
     <section id="contact" className="section-container">
       <div className="section-header">
-        <div className="section-tag">
-          <MessageSquare size={16} />
-          <span>Initiate Contact</span>
-        </div>
-        <h2 className="section-title">
-          Let’s Build Something <span className="text-gradient">Exceptional.</span>
-        </h2>
+        <span className="section-eyebrow">Contact / Connect</span>
+        <h2 className="section-title">Let’s Start a Conversation</h2>
         <p className="section-description">
-          Whether you’re seeking a senior engineer to architect high-concurrency systems, scale your web platform, or provide technical advisory, let’s talk.
+          Whether you have an interesting engineering challenge, a role to discuss, or just want to connect, feel free to reach out.
         </p>
       </div>
 
-      <div className="contact-grid">
-        {/* Left Column: Direct Info & Quick Copy */}
-        <div className="contact-info-card liquid-glass-card">
-          <h3 className="contact-card-title">Get In Touch Directly</h3>
-          <p className="contact-card-desc">
-            I am always open to discussing new engineering challenges, distributed system designs, or leadership roles.
-          </p>
+      <div className="contact-layout">
+        {/* Direct Reach Out Card */}
+        <motion.div
+          className="contact-card-wrap"
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <AppleTiltCard className="contact-card" maxTilt={4}>
+            <h3>Direct Reach</h3>
+            <p>
+              I aim to respond to all inquiries within 24 to 48 hours. Direct email is always the fastest channel.
+            </p>
 
-          {/* Quick Copy Email Box */}
-          <div className="email-copy-box liquid-glass">
-            <div className="email-copy-info">
-              <Mail size={18} className="email-icon" />
-              <span className="email-text">{personalInfo.email}</span>
-            </div>
-            <button
+            <motion.button
               onClick={handleCopyEmail}
-              className="copy-btn liquid-glass-btn-secondary"
-              aria-label="Copy email address"
+              className="contact-direct-email"
+              aria-label="Copy email"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {copied ? <Check size={16} className="text-success" /> : <Copy size={16} />}
-              <span>{copied ? 'Copied' : 'Copy'}</span>
-            </button>
-          </div>
+              <Mail size={16} />
+              <span>{personalInfo.email}</span>
+              {copied ? <Check size={14} style={{ color: 'var(--accent-dot)' }} /> : <Copy size={14} />}
+            </motion.button>
 
-          {/* Response Expectation */}
-          <div className="response-time-pill">
-            <Clock size={15} />
-            <span>Typical response time: within 24 hours</span>
-          </div>
+            <div style={{ marginTop: '24px' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '12px' }}>
+                Other Networks:
+              </span>
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <a
+                  href={personalInfo.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-link"
+                >
+                  <Github size={15} />
+                  <span>GitHub</span>
+                  <ArrowUpRight size={13} />
+                </a>
+                <a
+                  href={personalInfo.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-link"
+                >
+                  <Linkedin size={15} />
+                  <span>LinkedIn</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              </div>
+            </div>
+          </AppleTiltCard>
+        </motion.div>
 
-          {/* Social Profiles */}
-          <div className="contact-socials-wrapper">
-            <span className="socials-label">Online Presence:</span>
-            <div className="contact-socials-list">
-              <a
-                href={personalInfo.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="social-btn liquid-glass"
-                aria-label="GitHub Profile"
+        {/* Message Form Card */}
+        <motion.div
+          className="contact-card-wrap"
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <AppleTiltCard className="contact-card" maxTilt={4}>
+            <h3>Send a Message</h3>
+            
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Jane Doe"
+                  className="slate-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="jane@example.com"
+                  className="slate-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="message" className="form-label">Message</label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Details regarding your team, system challenge, or role..."
+                  className="slate-input"
+                  style={{ resize: 'vertical' }}
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                className="btn-primary"
+                style={{ width: '100%', marginTop: '6px' }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <Github size={18} />
-                <span>GitHub</span>
-                <ArrowUpRight size={14} className="social-arrow" />
-              </a>
-              <a
-                href={personalInfo.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="social-btn liquid-glass"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin size={18} />
-                <span>LinkedIn</span>
-                <ArrowUpRight size={14} className="social-arrow" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Interactive Contact Form */}
-        <div className="contact-form-card liquid-glass-card">
-          <h3 className="contact-card-title">Send a Message</h3>
-          
-          <form onSubmit={handleFormSubmit} className="contact-form">
-            <div className="form-group">
-              <label htmlFor="contact-name" className="form-label">Your Name</label>
-              <input
-                id="contact-name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Jane Doe"
-                className="liquid-glass-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="contact-email" className="form-label">Email Address</label>
-              <input
-                id="contact-email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="jane@company.com"
-                className="liquid-glass-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="contact-message" className="form-label">Message / Project Details</label>
-              <textarea
-                id="contact-message"
-                rows={4}
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="Tell me about your project, timeline, or engineering opportunity..."
-                className="liquid-glass-input form-textarea"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={formStatus === 'sending'}
-              className="liquid-glass-btn liquid-glass-btn-primary form-submit-btn"
-            >
-              {formStatus === 'sending' ? (
-                <span>Transmitting Message...</span>
-              ) : formStatus === 'sent' ? (
-                <>
-                  <Check size={18} />
-                  <span>Message Sent Successfully</span>
-                </>
-              ) : (
-                <>
-                  <span>Send Message</span>
-                  <Send size={16} />
-                </>
-              )}
-            </button>
-          </form>
-        </div>
+                {formSent ? (
+                  <span>Message Received ✓</span>
+                ) : (
+                  <>
+                    <span>Send Note</span>
+                    <Send size={14} />
+                  </>
+                )}
+              </motion.button>
+            </form>
+          </AppleTiltCard>
+        </motion.div>
       </div>
     </section>
   );

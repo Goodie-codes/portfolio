@@ -1,284 +1,362 @@
 /**
- * Single Source of Truth Portfolio Data Model
- * Centralizes all showcase information, projects, technical skills, and career history.
+ * Portfolio Data Model - Ezekiel Goodness
+ * Grounded in authentic CV credentials and GitHub repositories.
+ * Contains zero sensitive data, zero phone numbers, and zero education records.
  */
 
 export const personalInfo = {
-  name: "Goodness",
-  surname: "Ugwoke", // Easily editable
-  fullName: "Goodness",
-  roleTitle: "Senior Full-Stack Engineer & System Architect",
-  roles: [
-    "Senior Full-Stack Engineer",
-    "Cloud & Distributed Systems Architect",
-    "Creative Frontend Technologist",
-    "High-Performance System Builder"
-  ],
-  availabilityStatus: "Available for high-impact roles & technical consulting",
+  name: "Ezekiel Goodness",
+  shortName: "Ezekiel",
+  roleTitle: "Software Developer",
+  headline: "Software Developer building responsive, user-centric web applications and robust full-stack platforms.",
+  bio: "Software developer with hands-on experience building responsive, user-centric web applications using JavaScript, React, HTML5, and CSS3. Proven ability to mentor developers, collaborate within agile teams, and deliver clean, maintainable code. Expanding into full-stack development, driven by a passion for solving real-world problems through high-quality software, and serving as Chief Strategy Officer at Squared Labs Ltd.",
+  availabilityStatus: "Open for engineering roles & technical collaboration",
   isAvailable: true,
-  location: "Remote / Worldwide",
-  email: "goodness.codes@gmail.com",
+  location: "Ogun State, Nigeria / Remote",
+  email: "goodnessezekiel55@gmail.com",
+  githubUsername: "Goodie-codes",
   githubUrl: "https://github.com/Goodie-codes",
-  linkedinUrl: "https://linkedin.com/in/goodness",
-  twitterUrl: "https://x.com/goodie_codes",
-  resumeUrl: "#contact",
-  bio: "Senior Full-Stack Software Engineer with 6+ years of experience engineering resilient distributed backends, cloud-native microservices, and pixel-precise, ultra-fluid web applications. Passionate about system performance, clean software architecture, and elevating developer tooling.",
+  linkedinUrl: "https://www.linkedin.com/in/goodness-ezekiel/",
+  twitterUrl: "https://x.com/goodie_codes"
+};
+
+export const aboutMe = {
+  eyebrow: "About Me",
+  title: "Engineering software with precision, discipline, and strategic focus.",
+  summaryParagraphs: [
+    "I am a software developer with hands-on experience building responsive, user-centric web applications using JavaScript, React, HTML5, and CSS3.",
+    "With a proven ability to mentor junior developers, collaborate seamlessly within agile teams, and deliver clean, maintainable code, I focus on building resilient web platforms that solve real-world problems.",
+    "Driven by a continuous pursuit of engineering depth, I am expanding into full-stack platform architecture and currently serve as Chief Strategy Officer at Squared Labs Ltd, steering technology strategy and cross-functional product execution."
+  ],
+  pillars: [
+    {
+      title: "Front-End Craft",
+      desc: "Crafting responsive, accessible web interfaces with React, modern ES6+ JavaScript, HTML5, CSS3, and Tailwind CSS."
+    },
+    {
+      title: "Full-Stack Platforms",
+      desc: "Engineering scalable web applications with Next.js 14 App Router, PostgreSQL, Prisma ORM, and resilient APIs."
+    },
+    {
+      title: "Strategic Leadership",
+      desc: "Steering technology roadmaps, product vision, and engineering alignment as Chief Strategy Officer at Squared Labs Ltd."
+    },
+    {
+      title: "Mentorship & Culture",
+      desc: "Empowering developers through structured curriculum, community workshops, and constructive code reviews."
+    }
+  ],
   stats: [
-    { label: "Years Experience", value: "6+" },
-    { label: "Production Systems", value: "20+" },
-    { label: "System Uptime SLA", value: "99.99%" },
-    { label: "Engineered Scale", value: "100k+ MAU" }
+    { label: "Core Focus", value: "React & Full-Stack" },
+    { label: "Executive Role", value: "CSO @ Squared Labs" },
+    { label: "Engineering Ethos", value: "Clean, Agile Code" }
   ]
 };
 
-export const projectCategories = [
-  { id: "all", label: "All Projects" },
-  { id: "fullstack", label: "Full-Stack & Cloud" },
-  { id: "systems", label: "AI & Distributed Systems" },
-  { id: "frontend", label: "Frontend & Creative Tech" }
-];
+export const technicalSkills = {
+  languages: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+  frameworks: ["React", "Next.js 14", "Tailwind CSS"],
+  tools: ["Git", "GitHub", "Vite", "Prisma ORM", "PostgreSQL"],
+  competencies: [
+    "Responsive Web Design",
+    "Technical Mentorship",
+    "Project Management",
+    "IT Support & Infrastructure",
+    "Agile Collaboration",
+    "Full-Stack Web Architecture"
+  ]
+};
 
-export const projects = [
+export const githubProjects = [
   {
-    id: "aura-cloud",
-    title: "AuraCloud Orchestrator",
-    tagline: "Distributed event streaming & cloud workflow orchestration engine",
-    category: "fullstack",
-    featured: true,
-    bannerGradient: "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)",
-    metrics: [
-      { label: "Throughput", value: "120k evt/s" },
-      { label: "Latency Reduction", value: "-48%" },
-      { label: "Reliability", value: "99.995%" }
+    id: "krystaformltd",
+    title: "Krysta Forms Enterprise Platform & CRM",
+    repoName: "Krystaformltd",
+    year: "2024",
+    tagline: "Full-stack corporate engineering platform and multi-discipline service registry.",
+    description: "Architected and deployed a full-stack corporate web platform and CRM using Next.js 14 (App Router), TypeScript, PostgreSQL, and Prisma ORM, featuring role-based access control (RBAC), dynamic RFQ lead pipelines, and serverless PDF/Excel reporting engines.",
+    githubUrl: "https://github.com/Goodie-codes/Krystaformltd",
+    liveUrl: "https://krystaformsltd.com",
+    primaryLanguage: "TypeScript",
+    badge: "Enterprise Full-Stack",
+    stack: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma ORM", "Tailwind CSS"],
+    highlights: [
+      "Role-based access control (RBAC) and CRM lead management",
+      "Dynamic multi-channel RFQ lead pipelines and quote routing",
+      "Serverless PDF and Excel reporting generation engines"
     ],
-    technologies: ["Go", "React 19", "Kafka", "Kubernetes", "PostgreSQL", "Docker"],
-    shortDescription: "A fault-tolerant cloud workflow engine coordinating multi-step asynchronous tasks across distributed microservices with real-time state visualization.",
-    caseStudy: {
-      overview: "Designed and implemented an enterprise-scale distributed workflow orchestration platform capable of executing mission-critical background jobs with zero data loss and automated failover.",
-      problem: "Legacy batch processing pipelines suffered from unpredictable job queuing delays, high memory footprint, and lack of visual introspection into distributed failure points.",
-      architecture: [
-        "Partitioned event log built with Apache Kafka for deterministic replayability.",
-        "High-performance Go worker pool with adaptive backpressure management.",
-        "Real-time WebSockets streaming pipeline broadcasting state transitions to the React front-end.",
-        "PostgreSQL state store with optimistic locking and distributed lease management."
-      ],
-      impact: "Reduced end-to-end task execution latency by 48% while saving 35% in cloud compute resources through intelligent resource pooling."
-    },
-    demoUrl: "https://github.com/Goodie-codes/portfolio",
-    repoUrl: "https://github.com/Goodie-codes/portfolio"
+    details: {
+      problem: "Industrial engineering enterprises require centralized, structured digital registries for client RFQs, multi-tier service capabilities, verified engineering records, and automated lead reporting.",
+      solution: "Architected and deployed a scalable full-stack web platform using Next.js 14 App Router, PostgreSQL, Prisma ORM, hierarchical service routing, and serverless document generation.",
+      stack: ["Next.js 14", "TypeScript", "React", "Prisma ORM", "PostgreSQL", "Tailwind CSS"],
+      highlights: [
+        "Role-based access control (RBAC) with secure session handling",
+        "Dynamic RFQ lead routing and quote lifecycle engine",
+        "Serverless PDF/Excel reporting export utilities"
+      ]
+    }
   },
   {
-    id: "pulse-analytics",
-    title: "PulseAnalytics Engine",
-    tagline: "Sub-millisecond telemetry visualizer and real-time observability platform",
-    category: "systems",
-    featured: true,
-    bannerGradient: "linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%)",
-    metrics: [
-      { label: "Query Speed", value: "< 12ms" },
-      { label: "Data Ingestion", value: "50M daily" },
-      { label: "Compression", value: "4.2x" }
+    id: "reach",
+    title: "RentIt Marketplace Web UI",
+    repoName: "Reach",
+    year: "2024",
+    tagline: "Modern peer-to-peer rental marketplace web interface.",
+    description: "High-fidelity rental marketplace platform engineered from Figma design system tokens into responsive, interactive frontend architecture with modular listing filters and tactile UI components.",
+    githubUrl: "https://github.com/Goodie-codes/Reach",
+    liveUrl: "https://reach-seven-jade.vercel.app/",
+    primaryLanguage: "JavaScript / React",
+    badge: "Marketplace UI",
+    stack: ["JavaScript", "React", "Vite", "Tailwind CSS"],
+    highlights: [
+      "Faithful translation of Figma design tokens",
+      "Sub-millisecond category filtering and state management",
+      "Zero layout-shift responsive grid layout"
     ],
-    technologies: ["TypeScript", "ClickHouse", "Rust / Wasm", "Next.js", "TailwindCSS"],
-    shortDescription: "High-density telemetry dashboard with sub-second analytical queries over tens of millions of records, featuring canvas-rendered time-series charts.",
-    caseStudy: {
-      overview: "Engineered an in-browser time-series analysis platform processing gigabytes of raw server metric traces using WebAssembly and columnar storage.",
-      problem: "Traditional analytics dashboards frequently crashed browser threads when rendering hundreds of thousands of datapoints simultaneously.",
-      architecture: [
-        "Custom Rust-compiled WebAssembly parser executing data downsampling client-side off the main thread (Web Workers).",
-        "High-performance Canvas2D render engine rendering 120 FPS multi-variable charts.",
-        "ClickHouse columnar database engine optimizing aggregations with vectorized execution."
-      ],
-      impact: "Allowed engineering teams to diagnose live production outages 5x faster with instantaneous query feedback."
-    },
-    demoUrl: "https://github.com/Goodie-codes/portfolio",
-    repoUrl: "https://github.com/Goodie-codes/portfolio"
+    details: {
+      problem: "Translating complex marketplace design systems with nested search filters, booking calendars, and category drill-downs into fast, layout-shift-free web interfaces.",
+      solution: "Structured a component-driven React architecture with reusable property cards, fluid micro-interactions, responsive navigation, and performant state updates.",
+      stack: ["React", "JavaScript", "Vite", "Tailwind CSS"],
+      highlights: [
+        "Sub-millisecond category filtering",
+        "Zero layout-shift responsive grid layout",
+        "Faithful translation of Figma design tokens"
+      ]
+    }
   },
   {
-    id: "nexus-crdt",
-    title: "Nexus Collaborative Canvas",
-    tagline: "Local-first collaborative workspace with conflict-free replicated data types",
-    category: "frontend",
-    featured: true,
-    bannerGradient: "linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)",
-    metrics: [
-      { label: "Sync Latency", value: "< 25ms" },
-      { label: "Conflict Rate", value: "0.00%" },
-      { label: "Offline First", value: "100%" }
+    id: "moviesearcher",
+    title: "MovieSearcher Web App",
+    repoName: "moviesearcher",
+    year: "2024",
+    tagline: "Real-time film and TV discovery engine querying public media APIs.",
+    description: "A dynamic React application enabling instant querying across extensive movie and television datasets, displaying real-time ratings, high-resolution poster artwork, release metadata, and detailed synopses.",
+    githubUrl: "https://github.com/Goodie-codes/moviesearcher",
+    liveUrl: "https://moviesearcher-blush.vercel.app",
+    primaryLanguage: "JavaScript / React",
+    badge: "Media API App",
+    stack: ["React", "JavaScript", "REST APIs", "CSS3"],
+    highlights: [
+      "Debounced live search querying with instant response",
+      "Responsive media grid with fallback image states",
+      "Real-time score and rating aggregation"
     ],
-    technologies: ["React 19", "Yjs / CRDT", "WebSockets", "IndexedDB", "Vanilla CSS"],
-    shortDescription: "A Figma-grade collaborative canvas enabling seamless real-time co-authoring, offline state persistence, and instant multi-client peer synchronization.",
-    caseStudy: {
-      overview: "Built a multiplayer spatial canvas where distributed teams collaborate with live cursor tracking, instant shape rendering, and zero synchronization conflicts.",
-      problem: "Synchronous server-locking models introduced noticeable lag for international team members and completely failed in offline situations.",
-      architecture: [
-        "CRDT document data structure powered by Yjs ensuring deterministic convergence across all network topologies.",
-        "Local-first persistence through IndexedDB with automatic delta synchronization on network reconnect.",
-        "Ephemeral awareness protocol over lightweight WebSockets delivering 60 FPS remote cursor broadcasting."
-      ],
-      impact: "Zero data conflicts recorded across 10,000+ simulated simultaneous edit sessions."
-    },
-    demoUrl: "https://github.com/Goodie-codes/portfolio",
-    repoUrl: "https://github.com/Goodie-codes/portfolio"
+    details: {
+      problem: "Handling asynchronous API search queries without UI freezing, debouncing search keystrokes, and gracefully handling missing artwork or sparse movie metadata.",
+      solution: "Implemented asynchronous query hooks with debounced input, fallback image handling, responsive cards, and clean modal detail dialogs.",
+      stack: ["React", "JavaScript", "Public REST API", "Vite"],
+      highlights: [
+        "Debounced live search querying",
+        "Responsive media grid with fallback states",
+        "Real-time score and rating aggregation"
+      ]
+    }
   },
   {
-    id: "synthetix-ai",
-    title: "Synthetix Agent Studio",
-    tagline: "Agentic AI pipeline orchestrator with automated benchmark evaluation",
-    category: "systems",
-    featured: true,
-    bannerGradient: "linear-gradient(135deg, #10B981 0%, #06B6D4 100%)",
-    metrics: [
-      { label: "Task Accuracy", value: "94.2%" },
-      { label: "Cost Reduction", value: "-62%" },
-      { label: "Context Window", value: "128k tok" }
+    id: "portfolio",
+    title: "Flagship Portfolio & PWA",
+    repoName: "portfolio",
+    year: "2025",
+    tagline: "Apple visionOS-inspired developer portfolio with PWA and live GitHub telemetry.",
+    description: "The flagship portfolio codebase. Engineered with Apple-grade spring physics, 3D perspective card tilt, real-time GitHub API telemetry, and offline-first Progressive Web App capabilities.",
+    githubUrl: "https://github.com/Goodie-codes/portfolio",
+    liveUrl: "https://github.com/Goodie-codes/portfolio",
+    primaryLanguage: "React / Vite / PWA",
+    badge: "Flagship System",
+    stack: ["React", "Motion", "PWA", "Vite", "CSS3"],
+    highlights: [
+      "Full Progressive Web App (PWA) with offline precaching",
+      "3D perspective tilt with specular cursor spotlight",
+      "Hardware-accelerated spring animations and fluid layouts"
     ],
-    technologies: ["Python", "FastAPI", "React 19", "PostgreSQL", "Docker", "Redis"],
-    shortDescription: "Autonomous developer agent pipeline orchestrating multi-step code synthesis, unit test execution, and sandboxed validation.",
-    caseStudy: {
-      overview: "Created a declarative framework for composing multi-agent software development teams with automated feedback loops and static code analysis.",
-      problem: "Raw LLM completions produce brittle code that frequently breaks integration boundaries without autonomous verification loops.",
-      architecture: [
-        "Async FastAPI backend orchestrating isolated Docker containers for secure script execution.",
-        "Streaming server-sent events (SSE) feeding real-time thought trajectories to the React front-end.",
-        "Smart semantic caching layer powered by Redis reducing API token expenses by 62%."
-      ],
-      impact: "Automated over 70% of repetitive boilerplate test generation and schema synchronization tasks."
-    },
-    demoUrl: "https://github.com/Goodie-codes/portfolio",
-    repoUrl: "https://github.com/Goodie-codes/portfolio"
+    details: {
+      problem: "Modern developer portfolios frequently look like generic templates with static cards, neon orb gradients, and disconnected placeholder copy.",
+      solution: "Built an authentic, high-polish experience with visionOS frosted glass aesthetics, Apple spring-physics sliding tabs, hardware-accelerated 3D tilt, and full offline PWA support.",
+      stack: ["React", "Vite", "Motion", "CSS Architecture", "Service Workers"],
+      highlights: [
+        "Full Progressive Web App (PWA) with offline caching",
+        "3D perspective tilt with specular cursor spotlight",
+        "Zero-CLS responsive typography and layout"
+      ]
+    }
+  },
+  {
+    id: "calculator",
+    title: "Interactive Calculator",
+    repoName: "Calculator",
+    year: "2023",
+    tagline: "Lightweight client-side evaluation engine and calculator.",
+    description: "Clean mathematical expression evaluator built with semantic HTML5, pure CSS layout, and JavaScript DOM state management.",
+    githubUrl: "https://github.com/Goodie-codes/Calculator",
+    liveUrl: "https://calculator-blue-kappa.vercel.app",
+    primaryLanguage: "HTML / JavaScript",
+    badge: "Utility App",
+    stack: ["JavaScript", "HTML5", "CSS3"],
+    highlights: [
+      "Direct DOM expression evaluation",
+      "Accessible keyboard and touch input support",
+      "Clean zero-dependency architecture"
+    ],
+    details: {
+      problem: "Building a reliable, zero-dependency calculation utility with accurate operator precedence and clean DOM event handling.",
+      solution: "Implemented an expression evaluation engine supporting sequential operations, clear states, and responsive styling.",
+      stack: ["HTML5", "CSS3", "JavaScript"],
+      highlights: ["Zero external dependencies", "Keyboard and touch accessible"]
+    }
+  },
+  {
+    id: "practice-labs",
+    title: "CSS Architecture & UI Labs",
+    repoName: "practice",
+    year: "2024",
+    tagline: "Foundational layouts, typography systems, and DOM interaction experiments.",
+    description: "Hands-on engineering sandboxes exploring CSS Grid, responsive flexbox constraints, fluid typography, and accessible DOM event patterns.",
+    githubUrl: "https://github.com/Goodie-codes/practice",
+    liveUrl: "https://practice-ecru-eight.vercel.app",
+    primaryLanguage: "CSS / JavaScript",
+    badge: "Experimental Labs",
+    stack: ["CSS3", "HTML5", "JavaScript"],
+    highlights: [
+      "Grid and flexbox responsive stress tests",
+      "Semantic HTML typography hierarchy",
+      "Exploratory portfolio prototypes"
+    ],
+    details: {
+      problem: "Testing cutting-edge CSS specifications, fluid clamp scaling, and layout behaviors across mobile and desktop viewports.",
+      solution: "Constructed targeted prototypes isolating specific CSS features, container queries, and animation timelines.",
+      stack: ["CSS3", "HTML5", "JavaScript"],
+      highlights: ["Modular layout prototypes", "Responsive design patterns"]
+    }
+  },
+  {
+    id: "prjct0",
+    title: "Prjct0 Portfolio Foundation",
+    repoName: "prjct0",
+    year: "2024",
+    tagline: "Early portfolio prototype testing semantic structure and responsive layouts.",
+    description: "Clean foundational exploratory build examining CSS tokenization, card hierarchy, and modern layout structure.",
+    githubUrl: "https://github.com/Goodie-codes/prjct0",
+    liveUrl: "https://prjct0.vercel.app",
+    primaryLanguage: "CSS / HTML",
+    badge: "Design Foundation",
+    stack: ["CSS3", "HTML5", "Responsive Web"],
+    highlights: [
+      "Early design system explorations",
+      "Semantic HTML5 structuring",
+      "Lightweight styling"
+    ],
+    details: {
+      problem: "Structuring early portfolio layout experiments before scaling into complete application frameworks.",
+      solution: "Built a clean HTML5/CSS3 prototype with responsive media queries and custom property tokens.",
+      stack: ["HTML5", "CSS3"],
+      highlights: ["Modular CSS variables", "Mobile-first responsive design"]
+    }
   }
 ];
 
-export const skillCategories = [
+export const selectedProjects = githubProjects;
+
+export const craftAreas = [
   {
-    name: "Frontend Craft",
-    description: "Building responsive, accessible, and ultra-fluid web interfaces with modern engineering rigor.",
-    skills: [
-      { name: "React 19 / Next.js", level: "Expert", highlight: "Server Components & Suspense" },
-      { name: "TypeScript / JavaScript (ES6+)", level: "Expert", highlight: "Strict Typings & Generics" },
-      { name: "Vanilla CSS / Design Systems", level: "Expert", highlight: "Tokens & GPU Composited FX" },
-      { name: "WebSockets & Local-First", level: "Advanced", highlight: "CRDTs & Real-Time Sync" },
-      { name: "Performance & Accessibility", level: "Expert", highlight: "CWV & WCAG 2.1 AA" },
-      { name: "Vite / Webpack / Tooling", level: "Advanced", highlight: "Tree-Shaking & Bundle Tuning" }
-    ]
+    title: "Front-End Engineering",
+    description: "Building responsive, user-centric web applications using modern JavaScript (ES6+), React, HTML5, CSS3, and Tailwind CSS with disciplined accessibility and smooth interactions.",
+    technologies: ["JavaScript (ES6+)", "React", "HTML5", "CSS3", "Tailwind CSS", "Vite"]
   },
   {
-    name: "Backend & Systems",
-    description: "Engineering scalable distributed architectures, concurrent services, and robust APIs.",
-    skills: [
-      { name: "Node.js / Express / Fastify", level: "Expert", highlight: "Asynchronous I/O & Microservices" },
-      { name: "Python / FastAPI", level: "Advanced", highlight: "Async APIs & Agentic Pipelines" },
-      { name: "Go (Golang)", level: "Proficient", highlight: "High Concurrency & Goroutines" },
-      { name: "RESTful & GraphQL APIs", level: "Expert", highlight: "Schema Design & Versioning" },
-      { name: "Event-Driven Systems", level: "Advanced", highlight: "Kafka & Redis Pub/Sub" },
-      { name: "Microservice Architecture", level: "Expert", highlight: "Service Discovery & Resilience" }
-    ]
+    title: "Full-Stack Development & Architecture",
+    description: "Expanding into full-stack web platforms, architecting Next.js 14 App Router applications, PostgreSQL databases with Prisma ORM, RBAC systems, and serverless document generation.",
+    technologies: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma ORM", "REST APIs", "Node.js"]
   },
   {
-    name: "Databases & Storage",
-    description: "Designing performant data models, indexing strategies, and caching solutions.",
-    skills: [
-      { name: "PostgreSQL", level: "Expert", highlight: "Indexing, Query Plans & Migrations" },
-      { name: "Redis", level: "Advanced", highlight: "In-Memory Caching & Distributed Locks" },
-      { name: "ClickHouse", level: "Proficient", highlight: "Columnar OLAP Telemetry" },
-      { name: "Prisma & Drizzle ORM", level: "Expert", highlight: "Type-Safe Relational Queries" },
-      { name: "MongoDB", level: "Advanced", highlight: "Document Modeling & Aggregations" }
-    ]
+    title: "Technical Mentorship & Collaboration",
+    description: "Proven track record of mentoring junior developers in front-end fundamentals, conducting constructive code reviews, and collaborating in agile teams to ship clean, maintainable code.",
+    technologies: ["Agile Development", "Code Reviews", "Technical Mentorship", "Community Workshops"]
   },
   {
-    name: "Cloud & DevOps",
-    description: "Continuous deployment, containerization, and infrastructure reliability.",
-    skills: [
-      { name: "Docker & Containerization", level: "Expert", highlight: "Multi-stage Lean Builds" },
-      { name: "Kubernetes (K8s)", level: "Proficient", highlight: "Pod Management & Deployments" },
-      { name: "AWS (ECS, S3, CloudFront)", level: "Advanced", highlight: "Serverless & Cloud Networking" },
-      { name: "GitHub Actions CI/CD", level: "Expert", highlight: "Automated Testing & Deployment" },
-      { name: "Terraform & IaC", level: "Proficient", highlight: "Declarative Infrastructure" },
-      { name: "Nginx & Reverse Proxies", level: "Advanced", highlight: "TLS & Load Balancing" }
-    ]
+    title: "Project Management & Systems Support",
+    description: "Combining project management and IT support expertise to ensure infrastructure reliability, milestone execution, cross-functional team coordination, and minimal downtime.",
+    technologies: ["Git / GitHub", "IT Infrastructure", "Incident Resolution", "Project Tracking"]
   }
 ];
 
 export const experiences = [
   {
-    id: "lead-engineer",
-    role: "Senior Full-Stack Engineer",
-    company: "CloudScale Systems",
-    period: "2023 — Present",
-    location: "San Francisco, CA (Remote)",
-    description: "Spearheaded the core platform architecture team building real-time collaboration engines and microservice orchestration frameworks.",
-    highlights: [
-      "Architected real-time event streaming pipeline processing 100M+ events daily with sub-50ms latency.",
-      "Championed the migration to React 19 and modern CSS design tokens, improving Lighthouse scores from 68 to 98.",
-      "Mentored junior and mid-level engineers, instituting Spec-Driven Development and rigorous code reviews."
-    ],
-    technologies: ["React 19", "TypeScript", "Node.js", "Kafka", "PostgreSQL", "AWS"]
+    role: "Chief Strategy Officer",
+    company: "Squared Labs Ltd",
+    period: "June 2026 – Present",
+    type: "Leadership",
+    description: "Driving organizational technology strategy, product alignment, and strategic execution to solve real-world problems through high-quality software.",
+    points: [
+      "Steering organizational strategy, technical architecture, and roadmap execution for digital solutions.",
+      "Aligning cross-functional engineering and design initiatives to deliver high-impact software products.",
+      "Evaluating emerging web technologies and architecting strategic development roadmaps."
+    ]
   },
   {
-    id: "fullstack-engineer",
-    role: "Full-Stack Software Engineer",
-    company: "Apex Tech Labs",
-    period: "2021 — 2023",
-    location: "New York, NY (Remote)",
-    description: "Built developer tooling, internal analytics platforms, and user-facing dashboards with strict performance constraints.",
-    highlights: [
-      "Engineered automated ETL telemetry dashboard handling 50k concurrent queries with zero degradation.",
-      "Reduced API response times by 40% through Redis multi-tier caching and query optimization.",
-      "Implemented comprehensive CI/CD pipelines reducing deployment failure rates by 75%."
-    ],
-    technologies: ["TypeScript", "FastAPI", "React", "Docker", "Redis", "ClickHouse"]
+    role: "Software Developer Intern",
+    company: "EThree10",
+    period: "April 2026 – Present",
+    type: "Engineering",
+    description: "Developing and maintaining full-stack web applications using React and modern JavaScript within an agile engineering team.",
+    points: [
+      "Developing and maintaining full-stack web applications using React and modern JavaScript.",
+      "Collaborating with cross-functional teams to design, build, and iteratively ship new product features.",
+      "Participating in code reviews and contributing to technical discussions to uphold code quality standards."
+    ]
   },
   {
-    id: "software-developer",
-    role: "Software Developer",
-    company: "Innovate Digital",
-    period: "2019 — 2021",
-    location: "Remote",
-    description: "Developed customer-facing web applications, responsive single-page apps, and RESTful microservices.",
-    highlights: [
-      "Developed 10+ end-to-end client applications with 100% test coverage for critical payment flows.",
-      "Engineered responsive, accessible design systems adhering to WCAG 2.1 AA standards.",
-      "Collaborated with cross-functional product and design teams in high-velocity agile sprints."
-    ],
-    technologies: ["JavaScript", "React", "Node.js", "PostgreSQL", "TailwindCSS"]
+    role: "Assistant Stack Lead, Front-End Development",
+    company: "Redeemer’s University Tech Space (RUNTECHSPACE)",
+    period: "November 2023 – November 2024",
+    type: "Mentorship & Leadership",
+    description: "Led front-end training curriculum and hands-on workshops for aspiring web developers.",
+    points: [
+      "Mentored beginner developers in front-end fundamentals, including HTML, CSS, and JavaScript.",
+      "Reviewed student projects and provided structured feedback to enforce coding best practices.",
+      "Facilitated hands-on workshops and collaborative sessions to build a thriving developer community."
+    ]
+  },
+  {
+    role: "IT Support Intern",
+    company: "Conserveria Africana (GBFoods)",
+    period: "June 2024 – October 2024",
+    type: "IT Infrastructure",
+    description: "Delivered company-wide technical support and hardware/software troubleshooting.",
+    points: [
+      "Provided technical support and troubleshooting for hardware, software, and network issues organization-wide.",
+      "Assisted with maintenance of the IT infrastructure to ensure minimal downtime for internal business systems.",
+      "Documented support procedures and tracked incidents to improve resolution efficiency."
+    ]
+  },
+  {
+    role: "Frontend Development Intern",
+    company: "CodSoft",
+    period: "January 2024 – February 2024",
+    type: "Engineering",
+    description: "Engineered responsive, interactive web interfaces as part of an intensive development program.",
+    points: [
+      "Built and deployed responsive web interfaces as part of a structured front-end development program.",
+      "Applied HTML, CSS, and JavaScript to develop interactive, real-world web projects."
+    ]
   }
 ];
 
-export const terminalCommands = {
-  help: `Available commands:
-  • about       - Display professional summary & background
-  • skills      - List core engineering technologies & competencies
-  • projects    - View flagship full-stack projects & architectures
-  • experience  - Show career journey & timeline milestones
-  • contact     - Show direct email, GitHub & socials
-  • clear       - Wipe the terminal display
-  • sudo        - Superuser privileges easter egg`,
+export const volunteeringAndLeadership = [
+  {
+    role: "Operations Team Member",
+    organization: "AI NOW Bootcamp",
+    period: "July 20, 2026 – July 24, 2026",
+    description: "Coordinated operational workflows, technical assistance, and event execution for intensive artificial intelligence bootcamp participants."
+  },
+  {
+    role: "Project Team Member",
+    organization: "Future Leaders Assembly — The Dare Adeboye Foundation",
+    period: "May 2026",
+    description: "Contributed to the planning and successful execution of the Foundation-hosted leadership development event.",
+    points: [
+      "Collaborated with a multidisciplinary project team to coordinate activities and deliver outcomes aligned with Foundation objectives.",
+      "Applied project management skills to support task tracking, team communication, and timely delivery of event milestones."
+    ]
+  }
+];
 
-  about: `Goodness — Senior Full-Stack Engineer & System Architect
-Over 6 years of experience engineering high-concurrency distributed backends,
-cloud architectures, and ultra-fluid modern user interfaces.
-Specialties: Distributed Systems, React 19, Go, Node.js, Cloud/Kubernetes.`,
-
-  skills: `Technical Core:
-  [Frontend]   React 19, TypeScript, Next.js, Vanilla CSS, WebSockets, WCAG
-  [Backend]    Node.js, Go, Python/FastAPI, Kafka, Microservices, REST/GraphQL
-  [Databases]  PostgreSQL, Redis, ClickHouse, Prisma, MongoDB
-  [Cloud/Ops]  Docker, Kubernetes, AWS, GitHub Actions, Terraform, Nginx`,
-
-  projects: `Flagship Projects:
-  1. AuraCloud Orchestrator   - Distributed event streaming & workflow engine (Go, Kafka, React)
-  2. PulseAnalytics Engine    - Sub-millisecond telemetry & observability (ClickHouse, Wasm, Next.js)
-  3. Nexus Collaborative      - Local-first CRDT spatial canvas (React 19, Yjs, WebSockets)
-  4. Synthetix Agent Studio   - Multi-agent AI software execution pipeline (Python, FastAPI, Docker)`,
-
-  experience: `Career Highlights:
-  • 2023 — Present: Senior Full-Stack Engineer @ CloudScale Systems
-  • 2021 — 2023:    Full-Stack Software Engineer @ Apex Tech Labs
-  • 2019 — 2021:    Software Developer @ Innovate Digital`,
-
-  contact: `Connect:
-  • Email:    goodness.codes@gmail.com
-  • GitHub:   https://github.com/Goodie-codes
-  • Status:   Available for high-impact roles & technical advisory`
-};
