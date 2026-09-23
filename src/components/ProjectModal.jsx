@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { X, ExternalLink, CheckCircle, Cpu, AlertCircle, BarChart3 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { Github } from './BrandIcons';
 
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
@@ -21,123 +20,118 @@ export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div 
-        className="modal-content liquid-glass" 
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-project-title"
+    <AnimatePresence>
+      <motion.div
+        className="modal-backdrop"
+        onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.24 }}
       >
-        {/* Modal Header */}
-        <div className="modal-header">
-          <div className="modal-title-wrap">
-            <span className="modal-category-tag">{project.category}</span>
-            <h3 id="modal-project-title" className="modal-title">{project.title}</h3>
-            <p className="modal-tagline">{project.tagline}</p>
-          </div>
-          <button 
-            onClick={onClose} 
-            className="modal-close-btn"
-            aria-label="Close architecture modal"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Modal Body */}
-        <div className="modal-body">
-          {/* Quantified Metrics Highlight */}
-          <div className="modal-metrics-container liquid-glass">
-            <div className="modal-section-label">
-              <BarChart3 size={15} />
-              <span>Key Architectural Metrics</span>
+        <motion.div
+          className="modal-content"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          initial={{ opacity: 0, scale: 0.94, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.96, y: 16 }}
+          transition={{ type: 'spring', damping: 28, stiffness: 340 }}
+        >
+          <div className="modal-header">
+            <div>
+              <span className="section-eyebrow">{project.year || '2025'} Architectural Brief</span>
+              <h2 className="section-title" style={{ fontSize: '1.75rem', marginBottom: '6px' }}>
+                {project.title}
+              </h2>
+              <p className="project-item-tagline" style={{ marginBottom: 0 }}>
+                {project.tagline || 'Production engineering breakdown & architectural trade-offs'}
+              </p>
             </div>
-            <div className="modal-metrics-grid">
-              {project.metrics.map((metric, i) => (
-                <div key={i} className="modal-metric-card">
-                  <div className="metric-huge text-gradient">{metric.value}</div>
-                  <div className="metric-name">{metric.label}</div>
+            <motion.button
+              onClick={onClose}
+              className="modal-close-btn"
+              aria-label="Close modal"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <X size={16} />
+            </motion.button>
+          </div>
+
+          <div className="modal-body">
+            {project.details && (
+              <>
+                <div>
+                  <h3 className="modal-section-title">The Engineering Challenge</h3>
+                  <p className="modal-text">{project.details.problem}</p>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Problem Statement */}
-          <div className="modal-section-block">
-            <div className="modal-section-label text-warning">
-              <AlertCircle size={15} />
-              <span>The Engineering Problem</span>
-            </div>
-            <p className="modal-section-text">{project.caseStudy.problem}</p>
-          </div>
+                <div>
+                  <h3 className="modal-section-title">Architecture & System Design</h3>
+                  <p className="modal-text">{project.details.solution}</p>
+                </div>
 
-          {/* Architecture Highlights */}
-          <div className="modal-section-block">
-            <div className="modal-section-label text-accent">
-              <Cpu size={15} />
-              <span>System Architecture & Decisions</span>
-            </div>
-            <ul className="modal-architecture-list">
-              {project.caseStudy.architecture.map((item, idx) => (
-                <li key={idx} className="architecture-item">
-                  <CheckCircle size={16} className="item-bullet-icon" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+                <div>
+                  <h3 className="modal-section-title">Engineered Stack</h3>
+                  <div className="project-tags">
+                    {project.details.stack.map((t, idx) => (
+                      <span key={idx} className="project-tag">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-          {/* Impact Summary */}
-          <div className="modal-section-block">
-            <div className="modal-section-label text-success">
-              <CheckCircle size={15} />
-              <span>Measurable Outcome & Impact</span>
-            </div>
-            <p className="modal-section-text">{project.caseStudy.impact}</p>
-          </div>
-
-          {/* Technologies Used */}
-          <div className="modal-tech-stack">
-            <span className="tech-stack-label">Stack Employed:</span>
-            <div className="modal-tech-pills">
-              {project.technologies.map((t, idx) => (
-                <span key={idx} className="modal-tech-pill">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Modal Footer Links */}
-        <div className="modal-footer">
-          <div className="modal-footer-actions">
-            {project.repoUrl && (
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="liquid-glass-btn liquid-glass-btn-secondary"
-              >
-                <Github size={16} />
-                <span>View Source Code</span>
-              </a>
-            )}
-            {project.demoUrl && (
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="liquid-glass-btn liquid-glass-btn-primary"
-              >
-                <span>Launch Live System</span>
-                <ExternalLink size={16} />
-              </a>
+                {project.details.highlights && (
+                  <div>
+                    <h3 className="modal-section-title">Performance & Guarantees</h3>
+                    <div className="modal-highlights">
+                      {project.details.highlights.map((h, idx) => (
+                        <div key={idx} className="modal-highlight-item">
+                          <CheckCircle2 size={15} className="highlight-icon" />
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
-        </div>
-      </div>
-    </div>
+
+          <div className="modal-footer">
+            <div className="modal-actions">
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary"
+                  style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+                >
+                  <Github size={14} />
+                  <span>Inspect Repository</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              )}
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary"
+                  style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+                >
+                  <span>Launch Live System</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }

@@ -1,120 +1,139 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import { personalInfo } from '../data/portfolioData';
-import { 
-  ArrowRight, 
-  Terminal as TerminalIcon, 
-  Mail, 
-  Sparkles, 
-  CheckCircle2, 
-  Download 
-} from 'lucide-react';
+import { ArrowDown, Mail, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin } from './BrandIcons';
+import MagneticButton from './MagneticButton';
 
-export default function Hero({ onOpenTerminal }) {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+export default function Hero() {
+  const heroRef = useRef(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % personalInfo.roles.length);
-    }, 3200);
-    return () => clearInterval(timer);
-  }, []);
+  // Smooth pointer-reactive specular glow (lightweight)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 30, stiffness: 200 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  // Headline lines for cinematic staggered mask reveal
+  const headlineLines = [
+    "Software Developer",
+    "crafting high-performance",
+    "web platforms & interfaces."
+  ];
 
   return (
-    <section id="hero" className="hero-section">
-      <div className="section-container hero-container">
-        {/* Availability Pill */}
-        <div className="hero-availability">
-          <div className="liquid-glass-pill hero-status-pill">
-            <span className="status-indicator">
-              <span className="status-ping" />
-              <span className="status-dot" />
+    <section
+      id="top"
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      className="hero-section clean-hero"
+    >
+      {/* Interactive Cursor Ambient Spotlight */}
+      <motion.div
+        className="hero-ambient-spotlight"
+        style={{
+          left: smoothX,
+          top: smoothY,
+        }}
+      />
+
+      <div className="section-container hero-container clean-hero-container">
+        {/* Clean, Massive Kinetic Typography */}
+        <h1 className="hero-title kinetic-title" aria-label={headlineLines.join(' ')}>
+          {headlineLines.map((line, lineIdx) => (
+            <span key={lineIdx} className="kinetic-line-mask">
+              <motion.span
+                className="kinetic-line-text shimmer-text"
+                initial={{ y: '120%', opacity: 0 }}
+                animate={{ y: '0%', opacity: 1 }}
+                transition={{
+                  duration: 0.85,
+                  delay: 0.12 + lineIdx * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {line}
+              </motion.span>
             </span>
-            <span>{personalInfo.availabilityStatus}</span>
-          </div>
-        </div>
-
-        {/* Main Headline */}
-        <div className="hero-headline-wrapper">
-          <h1 className="hero-title">
-            Engineering scalable systems with <br className="hero-br" />
-            <span className="text-gradient">Liquid Precision & Craft.</span>
-          </h1>
-
-          {/* Dynamic Role Rotator */}
-          <div className="hero-role-rotator">
-            <span className="role-prefix">I build as a</span>
-            <span className="role-text-badge liquid-glass">
-              <Sparkles size={16} className="role-icon" />
-              <span key={currentRoleIndex} className="role-name-animated">
-                {personalInfo.roles[currentRoleIndex]}
-              </span>
-            </span>
-          </div>
-
-          <p className="hero-bio">{personalInfo.bio}</p>
-        </div>
-
-        {/* Hero CTAs */}
-        <div className="hero-actions">
-          <a href="#projects" className="liquid-glass-btn liquid-glass-btn-primary">
-            <span>Explore Flagship Work</span>
-            <ArrowRight size={18} />
-          </a>
-
-          <button
-            onClick={onOpenTerminal}
-            className="liquid-glass-btn liquid-glass-btn-secondary"
-            aria-label="Launch interactive developer terminal"
-          >
-            <TerminalIcon size={18} />
-            <span>Launch Console (CLI)</span>
-          </button>
-        </div>
-
-        {/* Social Links & Quick Proof */}
-        <div className="hero-social-strip">
-          <div className="social-links-list">
-            <a
-              href={personalInfo.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="social-icon-pill"
-              aria-label="GitHub Profile"
-            >
-              <Github size={18} />
-              <span>GitHub</span>
-            </a>
-            <a
-              href={personalInfo.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="social-icon-pill"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin size={18} />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="social-icon-pill"
-              aria-label="Send direct email"
-            >
-              <Mail size={18} />
-              <span>{personalInfo.email}</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Quick Stats Grid */}
-        <div className="hero-stats-grid">
-          {personalInfo.stats.map((stat, idx) => (
-            <div key={idx} className="stat-card liquid-glass">
-              <div className="stat-value text-gradient">{stat.value}</div>
-              <div className="stat-label">{stat.label}</div>
-            </div>
           ))}
-        </div>
+        </h1>
+
+        {/* Primary Actions with Magnetic Physics */}
+        <motion.div
+          className="hero-actions clean-hero-actions"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <MagneticButton pullFactor={0.2}>
+            <motion.a
+              href="#work"
+              className="btn-primary"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            >
+              <span>Explore Selected Work</span>
+              <ArrowDown size={15} />
+            </motion.a>
+          </MagneticButton>
+
+          <MagneticButton pullFactor={0.2}>
+            <motion.a
+              href="#contact"
+              className="btn-secondary"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            >
+              <span>Get in touch</span>
+            </motion.a>
+          </MagneticButton>
+        </motion.div>
+
+        {/* Quiet Social Links */}
+        <motion.div
+          className="hero-socials clean-hero-socials"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <a
+            href={personalInfo.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="hero-social-link"
+          >
+            <Github size={15} />
+            <span>GitHub</span>
+            <ArrowUpRight size={13} />
+          </a>
+          <a
+            href={personalInfo.linkedinUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="hero-social-link"
+          >
+            <Linkedin size={15} />
+            <span>LinkedIn</span>
+            <ArrowUpRight size={13} />
+          </a>
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="hero-social-link"
+          >
+            <Mail size={15} />
+            <span>{personalInfo.email}</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

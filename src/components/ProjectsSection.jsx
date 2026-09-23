@@ -1,57 +1,51 @@
-import React, { useState } from 'react';
-import { projects, projectCategories } from '../data/portfolioData';
-import ProjectCard from './ProjectCard';
-import { FolderGit2 } from 'lucide-react';
+import React from 'react';
+import { selectedProjects } from '../data/portfolioData';
+import { ArrowUpRight } from 'lucide-react';
+import { Github } from './BrandIcons';
 
 export default function ProjectsSection({ onSelectProject }) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const filteredProjects = selectedCategory === 'all'
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
-
   return (
-    <section id="projects" className="section-container">
+    <section id="work" className="section-container">
       <div className="section-header">
-        <div className="section-tag">
-          <FolderGit2 size={16} />
-          <span>Proven Proof of Work</span>
-        </div>
-        <h2 className="section-title">
-          Flagship <span className="text-gradient">Architectures & Systems</span>
-        </h2>
+        <span className="section-eyebrow">Portfolio / Work</span>
+        <h2 className="section-title">Selected Projects</h2>
         <p className="section-description">
-          A selection of production-grade systems, distributed backends, and high-performance interfaces engineered with measurable business impact.
+          Systems and web applications engineered with architectural intent, clean code, and practical problem solving.
         </p>
       </div>
 
-      {/* Filter Category Pills */}
-      <div className="projects-filter-bar">
-        <div className="filter-pills-container liquid-glass">
-          {projectCategories.map((category) => {
-            const isActive = selectedCategory === category.id;
-            return (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`filter-pill-btn ${isActive ? 'active' : ''}`}
-              >
-                {category.label}
-                {isActive && <span className="filter-pill-glow" />}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Project Cards Grid */}
-      <div className="projects-grid">
-        {filteredProjects.map((project) => (
-          <ProjectCard
+      <div className="projects-list">
+        {selectedProjects.map((project) => (
+          <article
             key={project.id}
-            project={project}
-            onSelectProject={onSelectProject}
-          />
+            className="project-item-card"
+            onClick={() => onSelectProject(project)}
+          >
+            <div className="project-item-top">
+              <h3 className="project-item-title">{project.title}</h3>
+              <div className="project-item-meta">
+                <span className="project-year">{project.year}</span>
+              </div>
+            </div>
+
+            <p className="project-item-tagline">{project.tagline}</p>
+            <p className="project-item-desc">{project.description}</p>
+
+            <div className="project-item-footer">
+              <div className="project-tags">
+                {project.details.stack.map((tech, i) => (
+                  <span key={i} className="project-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <span className="project-view-link">
+                <span>View Architecture & Case Study</span>
+                <ArrowUpRight size={14} />
+              </span>
+            </div>
+          </article>
         ))}
       </div>
     </section>
