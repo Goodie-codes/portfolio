@@ -26,10 +26,15 @@ export default function App() {
 
       <main className="main-content">
         <Hero />
+        <div className="section-divider-beam" />
         <AboutSection />
+        <div className="section-divider-beam" />
         <BentoGrid onSelectProject={handleSelectProject} />
+        <div className="section-divider-beam" />
         <ArchitectureInspector />
+        <div className="section-divider-beam" />
         <ExperienceSection />
+        <div className="section-divider-beam" />
         <ContactSection />
       </main>
 

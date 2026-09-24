@@ -9,7 +9,13 @@ export default function AboutSection() {
   return (
     <section id="about" className="section-container">
       {/* Section Header */}
-      <div className="section-header">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="section-eyebrow-wrap">
           <User size={14} className="section-eyebrow-icon" />
           <span className="section-eyebrow">{aboutMe.eyebrow}</span>
@@ -18,7 +24,7 @@ export default function AboutSection() {
         <p className="section-description">
           Software developer with hands-on experience crafting responsive, user-centric web applications and driving product strategy.
         </p>
-      </div>
+      </motion.div>
 
       {/* Main About Layout */}
       <div className="about-layout-grid">

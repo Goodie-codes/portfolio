@@ -68,13 +68,19 @@ export default function ArchitectureInspector() {
 
   return (
     <section id="craft" className="section-container">
-      <div className="section-header">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span className="section-eyebrow">Core Engineering</span>
         <h2 className="section-title">Technical Principles & Craft</h2>
         <p className="section-description">
           The principles and disciplines that guide every line of code I write, from architecture boundaries to tactile interface motion.
         </p>
-      </div>
+      </motion.div>
 
       <motion.div
         className="arch-inspector-container"

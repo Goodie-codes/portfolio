@@ -22,12 +22,6 @@ export default function Hero() {
     mouseY.set(e.clientY - rect.top);
   };
 
-  // Headline lines for cinematic staggered mask reveal
-  const headlineLines = [
-    "Software Developer",
-    "crafting high-performance",
-    "web platforms & interfaces."
-  ];
 
   return (
     <section
@@ -46,32 +40,42 @@ export default function Hero() {
       />
 
       <div className="section-container hero-container clean-hero-container">
-        {/* Clean, Massive Kinetic Typography */}
-        <h1 className="hero-title kinetic-title" aria-label={headlineLines.join(' ')}>
-          {headlineLines.map((line, lineIdx) => (
-            <span key={lineIdx} className="kinetic-line-mask">
-              <motion.span
-                className="kinetic-line-text shimmer-text"
-                initial={{ y: '120%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                transition={{
-                  duration: 0.85,
-                  delay: 0.12 + lineIdx * 0.12,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {line}
-              </motion.span>
-            </span>
-          ))}
+        {/* Big, Bold Monumental Name Header */}
+        <h1 className="hero-monumental-name kinetic-title" aria-label="Ezekiel Goodness">
+          <motion.span
+            className="kinetic-name-text shimmer-text"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            <span className="name-word">Ezekiel</span>{' '}
+            <span className="name-word">Goodness</span>
+          </motion.span>
         </h1>
+
+        {/* Editorial Sub-Headline */}
+        <motion.p
+          className="hero-monumental-desc"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.45,
+            delay: 0.08,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
+          Software Developer crafting high-performance web platforms, tactile interfaces, and distributed systems.
+        </motion.p>
 
         {/* Primary Actions with Magnetic Physics */}
         <motion.div
           className="hero-actions clean-hero-actions"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         >
           <MagneticButton pullFactor={0.2}>
             <motion.a
@@ -102,9 +106,9 @@ export default function Hero() {
         {/* Quiet Social Links */}
         <motion.div
           className="hero-socials clean-hero-socials"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
             href={personalInfo.githubUrl}
@@ -135,6 +139,18 @@ export default function Hero() {
           </a>
         </motion.div>
       </div>
+
+      {/* Sleek Bottom Scroll Indicator */}
+      <motion.div
+        className="hero-scroll-cue"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.6 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <div className="scroll-cue-mouse">
+          <div className="scroll-cue-wheel" />
+        </div>
+      </motion.div>
     </section>
   );
 }

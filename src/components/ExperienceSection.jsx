@@ -6,7 +6,13 @@ import { Briefcase, Calendar, Building2, CheckCircle2, HeartHandshake, ShieldChe
 export default function ExperienceSection() {
   return (
     <section id="experience" className="section-container">
-      <div className="section-header">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="section-eyebrow-wrap">
           <Briefcase size={14} className="section-eyebrow-icon" />
           <span className="section-eyebrow">Career & Leadership</span>
@@ -15,7 +21,7 @@ export default function ExperienceSection() {
         <p className="section-description">
           Engineering roles, technical leadership, and organizational strategy delivering resilient software systems and mentoring developer communities.
         </p>
-      </div>
+      </motion.div>
 
       {/* Main Experience Cards */}
       <div className="experience-cards-grid">
@@ -75,7 +81,13 @@ export default function ExperienceSection() {
       {/* Volunteering & Community Initiatives */}
       {volunteeringAndLeadership && volunteeringAndLeadership.length > 0 && (
         <div className="volunteering-section">
-          <div className="section-header volunteering-header">
+          <motion.div
+            className="section-header volunteering-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="section-eyebrow-wrap">
               <HeartHandshake size={14} className="section-eyebrow-icon" />
               <span className="section-eyebrow">Community & Impact</span>
@@ -84,7 +96,7 @@ export default function ExperienceSection() {
             <p className="section-description">
               Initiatives dedicated to community empowerment, technology education, and leadership development.
             </p>
-          </div>
+          </motion.div>
 
           <div className="experience-cards-grid">
             {volunteeringAndLeadership.map((item, idx) => (
