@@ -40,43 +40,30 @@ export default function Hero() {
       />
 
       <div className="section-container hero-container clean-hero-container">
-        {/* Status / Availability Eyebrow */}
-        <motion.div
-          className="hero-status-pill"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="status-dot-active" />
-          <span className="hero-status-text">Software Developer & Executive Strategy</span>
-        </motion.div>
-
         {/* Big, Bold Monumental Name Header */}
         <h1 className="hero-monumental-name kinetic-title" aria-label="Ezekiel Goodness">
-          <span className="kinetic-line-mask">
-            <motion.span
-              className="kinetic-name-text shimmer-text"
-              initial={{ y: '115%', opacity: 0 }}
-              animate={{ y: '0%', opacity: 1 }}
-              transition={{
-                duration: 0.85,
-                delay: 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              Ezekiel Goodness
-            </motion.span>
-          </span>
+          <motion.span
+            className="kinetic-name-text shimmer-text"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            <span className="name-word">Ezekiel</span>{' '}
+            <span className="name-word">Goodness</span>
+          </motion.span>
         </h1>
 
         {/* Editorial Sub-Headline */}
         <motion.p
           className="hero-monumental-desc"
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 0.75,
-            delay: 0.28,
+            duration: 0.45,
+            delay: 0.08,
             ease: [0.16, 1, 0.3, 1],
           }}
         >
@@ -86,9 +73,9 @@ export default function Hero() {
         {/* Primary Actions with Magnetic Physics */}
         <motion.div
           className="hero-actions clean-hero-actions"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         >
           <MagneticButton pullFactor={0.2}>
             <motion.a
@@ -119,9 +106,9 @@ export default function Hero() {
         {/* Quiet Social Links */}
         <motion.div
           className="hero-socials clean-hero-socials"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
             href={personalInfo.githubUrl}
@@ -152,6 +139,18 @@ export default function Hero() {
           </a>
         </motion.div>
       </div>
+
+      {/* Sleek Bottom Scroll Indicator */}
+      <motion.div
+        className="hero-scroll-cue"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.6 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <div className="scroll-cue-mouse">
+          <div className="scroll-cue-wheel" />
+        </div>
+      </motion.div>
     </section>
   );
 }
